@@ -1,14 +1,48 @@
-// TODO
+let inputList = {
+  list: ['rice', 'beef chuck']
+};
+
+class GroceryListItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      done: false
+    }; 
+  }
+
+  onListItemClick() {
+    this.setState({
+      done: !this.state.done
+    });
+  }
+
+  render() {
+    let style = {
+      fontWeight: this.state.done ? 'bold' : 'normal'
+    };
+
+    return (
+      <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.item}</li>
+    );
+  }
+}
+
 let GroceryList = (props) => (
   <ul>
-    <li>{props.list[0]}</li>
-    <li>{props.list[1]}</li>
+    {props.list.map(item =>
+      <GroceryListItem item={item} />
+    )}
   </ul>
 );
 
-let GroceryListItem = <GroceryList list={['rice', 'beef chuck']}/>;
 
-ReactDOM.render(GroceryListItem, document.getElementById('app'));
+
+
+ReactDOM.render(
+  <GroceryList list={inputList.list}></GroceryList>,
+  document.getElementById('app')
+);
 
 
 // let Rice = () => (
